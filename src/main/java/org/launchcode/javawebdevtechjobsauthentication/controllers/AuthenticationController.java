@@ -51,7 +51,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO, Errors error, HttpServletRequest request, Model model) {
+
+    public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO, Errors error, HttpServletRequest request) {
         if(error.hasErrors()){
             return "/login";
         }
@@ -59,6 +60,7 @@ public class AuthenticationController {
         User theUser = userRepository.findByuserName(loginFormDTO.getUserName());
         if(theUser == null) {
             error.rejectValue("userName", "user.invalid", "The given username does not exist");
+
             return "/login";
         }
 
@@ -93,6 +95,7 @@ public class AuthenticationController {
         User existingUser = userRepository.findByuserName(registerFormDTO.getUserName());
         if(existingUser != null) {
             error.rejectValue("userName", "username.alreadyexists", "A user with that username already exists");
+
             return "/register";
         }
 

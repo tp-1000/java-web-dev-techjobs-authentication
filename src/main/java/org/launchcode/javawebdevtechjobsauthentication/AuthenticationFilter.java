@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +20,8 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
     @Autowired
     AuthenticationController authenticationController;
 
-    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css", "/js/bootstrap.js");
+
+    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css");
 
     private static boolean isWhitelisted(String path) {
         for (String pathRoot: whitelist) {
